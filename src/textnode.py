@@ -10,14 +10,13 @@ class TextType(Enum):
     IMAGE = "image"
 
 class TextNode:
-    def __init__(self, text, text_type, url=None, alt=None):
+    def __init__(self, text, text_type, url=None):
         self.text = text
         self.text_type = text_type
         self.url = url
-        self.alt = alt
 
     def __eq__(self, other):
-        if self.text == other.text and self.text_type.value == other.text_type.value and self.url == other.url and self.alt == other.alt:
+        if self.text == other.text and self.text_type == other.text_type and self.url == other.url:
             return True
         return False
     
@@ -25,8 +24,6 @@ class TextNode:
         return f"TextNode({self.text}, {self.text_type.value}, {self.url})"
 
 def text_node_to_html_node(text_node):
-    if text_node is None:
-        raise Exception("TextNode is None")
     match text_node.text_type:
         case TextType.TEXT:
             return LeafNode(None, text_node.text)
@@ -43,6 +40,6 @@ def text_node_to_html_node(text_node):
                 raise Exception(f"TextNode IMAGE missing URL, text: {text_node.text}")
             if text_node.alt is None:
                 raise Exception(f"TextNode IMAGE missing alt, text: {text_node.text}")
-            return LeafNode("img", "", {"src":text_node.url, "alt":text_node.alt})
+            return LeafNode("img", "", {"src":text_node.url, "alt":text_node.text})
         case _:
-            raise Exception("Unknown TextType of the TextNode")
+            raise ValueError(f"Invalid text type: {text_node.text_type}")
