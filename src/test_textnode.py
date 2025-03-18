@@ -44,7 +44,7 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(html_node.props, {"href":"google.com"})
     
     def test_img(self):
-        node = TextNode("", TextType.IMAGE, "google.com", "alt text")
+        node = TextNode("alt text", TextType.IMAGE, "google.com")
         html_node = text_node_to_html_node(node)
         self.assertEqual(html_node.tag, "img")
         self.assertEqual(html_node.value, "")
