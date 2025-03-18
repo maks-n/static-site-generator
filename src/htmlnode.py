@@ -6,10 +6,10 @@ class HTMLNode():
         self.props = props
 
     def to_html(self):
-        raise NotImplementedError
+        raise NotImplementedError("to_html methid is not implemented")
 
     def __repr__(self):
-        return f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})"
+        return f"HTMLNode({self.tag}, {self.value}, children: {self.children}, {self.props})"
 
     def props_to_html(self):
         if self.props is None:
