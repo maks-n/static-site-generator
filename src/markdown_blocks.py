@@ -10,7 +10,6 @@ class BlockType(Enum):
 
 def block_to_block_type(block_of_markdown):
     lines = block_of_markdown.split("\n")
-
     if block_of_markdown.startswith(("# ", "## ", "### ", "#### ", "##### ", "###### ")):
         return BlockType.HEADING
     if len(lines) > 1 and lines[0].startswith("```") and lines[-1].startswith("```"):
@@ -35,11 +34,8 @@ def block_to_block_type(block_of_markdown):
 def markdown_to_blocks(markdown):
     blocks = markdown.split("\n\n")
     result_blocks = []
-
     for block in blocks:
         block = block.strip()
-
         if block != "":
             result_blocks.append(block)
-
     return result_blocks
