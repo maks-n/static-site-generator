@@ -6,6 +6,9 @@ class TestGenerator(unittest.TestCase):
     def test_extract_title_correct(self):
         markdown = "# title"
         self.assertEqual(extract_title(markdown), "title")
+    def test_extract_title_correct_strip(self):
+        markdown = "#       whitespaces title     "
+        self.assertEqual(extract_title(markdown), "whitespaces title")
     def test_extract_title_double_hash(self):
         markdown = "## double title"
         with self.assertRaises(ValueError):
