@@ -17,6 +17,13 @@ class TestGenerator(unittest.TestCase):
         markdown = " # whitespace title"
         with self.assertRaises(ValueError):
             extract_title(markdown)
+    def test_extract_title_double_title(self):
+        markdown = """
+# First title
+
+# Second title to be ignored
+"""
+        self.assertEqual(extract_title(markdown), "# First title")
 
 
 if __name__ == "__main__":
